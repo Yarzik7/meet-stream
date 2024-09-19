@@ -1,0 +1,13 @@
+:root {
+  /* Colors */
+  --accent-color: #000;
+  --primary-black-color: #1c1c1c;
+  --primary-text-color: #fff;
+
+  /* Sizes */
+  --border-radius: 8px;
+
+  /* Transitions and animations */
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-duration: 200ms;
+}
