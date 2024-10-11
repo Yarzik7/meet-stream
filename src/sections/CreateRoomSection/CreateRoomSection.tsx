@@ -13,13 +13,15 @@ const CreateRoomSection = () => {
       <Typography variant="h2" align="center">
         Create room
       </Typography>
-      <Button variant="contained" color="primary" onClick={onCreateNewRoom}>
-        Create new room
-      </Button>
-      <Input placeholder="Enter room code" />
-      <Button variant="text" color="success">
-        Connect
-      </Button>
+      <div>
+        <Button variant="contained" color="primary" onClick={onCreateNewRoom}>
+          Create new room
+        </Button>
+        <Input placeholder="Enter room code" />
+        <Button variant="text" color="success">
+          Connect
+        </Button>
+      </div>
     </SectionWithContainer>
   );
 };
