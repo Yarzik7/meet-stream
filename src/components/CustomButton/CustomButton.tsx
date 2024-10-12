@@ -5,7 +5,7 @@ interface ICustomButtonProps {
   children: React.ReactNode;
 }
 
-const CustomButton = ({ children }: IButtonProps) => {
+const CustomButton = ({ children }: ICustomButtonProps) => {
   return (
     <ButtonMUI variant="contained" color="primary">
       {children}
