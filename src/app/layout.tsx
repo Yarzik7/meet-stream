@@ -17,6 +17,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "MeetStream",
   description: "MeetStream",
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({
