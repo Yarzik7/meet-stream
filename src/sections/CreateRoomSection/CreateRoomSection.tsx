@@ -15,7 +15,7 @@ const CreateRoomSection = () => {
         Create room
       </Typography>
       <Box sx={{ display: "flex", gap: 10 }}>
-        <CustomButton>Create new room</CustomButton>
+        <CustomButton>New room</CustomButton>
         <Input placeholder="Enter room code" />
         <Button variant="text" color="success">
           Connect
