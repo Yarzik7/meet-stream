@@ -10,6 +10,10 @@ const CreateRoomSection = () => {
     console.log("Create new room");
   };
 
+  const onConnect = (): void => {
+    console.log("Connect");
+  };
+
   return (
     <SectionWithContainer>
       <Typography variant="h2" align="center">
@@ -18,9 +22,7 @@ const CreateRoomSection = () => {
       <Box sx={{ display: "flex", gap: "20px" }}>
         <CustomButton onClick={onCreateNewRoom}>New room</CustomButton>
         <Input label="Room code" />
-        <Button variant="text" color="success">
-          Connect
-        </Button>
+        <CustomButton onClick={onConnect}>Connect</CustomButton>
       </Box>
     </SectionWithContainer>
   );
