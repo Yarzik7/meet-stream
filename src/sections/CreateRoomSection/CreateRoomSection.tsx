@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import SectionWithContainer from "@/components/Section/SectionWithContainer/SectionWithContainer";
-import { Typography, Button, Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import Input from "@/components/Input/Input";
 import CustomButton from "@/components/CustomButton/CustomButton";
 
