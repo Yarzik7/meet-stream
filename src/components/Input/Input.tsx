@@ -7,7 +7,7 @@ interface IInputProps {
 
 const Input = ({ label }: IInputProps) => {
   const inputId = useId();
-  return <TextField id={inputId} label={label} variant="outlined" />;
+  return <TextField id={inputId} label={label} />;
 };
 
 export default Input;
