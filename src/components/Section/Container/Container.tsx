@@ -6,7 +6,11 @@ interface IContainerProps {
 }
 
 const Container = ({ children }: IContainerProps) => {
-  return <ContainerMUI maxWidth="sm">{children}</ContainerMUI>;
+  return (
+    <ContainerMUI maxWidth="sm" sx={{ height: "100%" }}>
+      {children}
+    </ContainerMUI>
+  );
 };
 
 export default Container;

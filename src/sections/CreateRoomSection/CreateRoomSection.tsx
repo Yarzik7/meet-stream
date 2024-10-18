@@ -16,13 +16,19 @@ const CreateRoomSection = () => {
 
   return (
     <SectionWithContainer>
-      <Typography variant="h2" align="center">
+      <Typography
+        variant="h1"
+        align="center"
+        sx={{ fontSize: "28px", color: "var(--accent-color)" }}
+      >
         Create room
       </Typography>
-      <Box sx={{ display: "flex", gap: "20px" }}>
+      <Box sx={{ marginTop: "20px" }}>
         <CustomButton onClick={onCreateNewRoom}>New room</CustomButton>
-        <Input label="Room code" />
-        <CustomButton onClick={onConnect}>Connect</CustomButton>
+        <Box sx={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+          <Input label="Room code" />
+          <CustomButton onClick={onConnect}>Connect</CustomButton>
+        </Box>
       </Box>
     </SectionWithContainer>
   );

@@ -1,12 +1,14 @@
-import { Typography } from "@mui/material";
+import { HeaderStyled } from "./Header.styled";
+import Container from "@/components/Section/Container/Container";
+import Logo from "@/components/Logo/Logo";
 
 const Header = () => {
   return (
-    <header>
-      <Typography variant="h1" align="center">
-        MeetStream
-      </Typography>
-    </header>
+    <HeaderStyled>
+      <Container>
+        <Logo />
+      </Container>
+    </HeaderStyled>
   );
 };
 

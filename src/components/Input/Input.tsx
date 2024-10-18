@@ -7,7 +7,18 @@ interface IInputProps {
 
 const Input = ({ label }: IInputProps) => {
   const inputId = useId();
-  return <TextField id={inputId} label={label} />;
+  return (
+    <TextField
+      id={inputId}
+      label={label}
+      slotProps={{
+        inputLabel: { sx: { top: "50%", transform: "translate(20px, -50%)" } },
+        input: {
+          sx: { height: "40px" },
+        },
+      }}
+    />
+  );
 };
 
 export default Input;
