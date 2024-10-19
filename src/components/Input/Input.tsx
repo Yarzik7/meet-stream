@@ -1,5 +1,10 @@
 import React, { useId } from "react";
-import { TextField } from "@mui/material";
+import {
+  // InputBase,
+  FormControl,
+  InputLabel,
+  Input as InputMUI,
+} from "@mui/material";
 
 interface IInputProps {
   label?: string;
@@ -7,18 +12,42 @@ interface IInputProps {
 
 const Input = ({ label }: IInputProps) => {
   const inputId = useId();
+  // console.log(label);
   return (
-    <TextField
-      id={inputId}
-      label={label}
-      slotProps={{
-        inputLabel: { sx: { top: "50%", transform: "translate(20px, -50%)" } },
-        input: {
-          sx: { height: "40px" },
-        },
-      }}
-    />
+    <>
+      <FormControl sx={{ border: "1px solid blue", padding: "4px" }}>
+        <InputLabel
+          htmlFor={inputId}
+          sx={{ color: "red", border: "1px solid red", padding: "6px" }}
+        >
+          {label}
+        </InputLabel>
+        <InputMUI
+          id={inputId}
+          aria-describedby="my-helper-text"
+          sx={{ border: "1px solid green", padding: "8px" }}
+          slotProps={{
+            input: { sx: { border: "1px solid aqua", padding: "10px" } },
+          }}
+        />
+      </FormControl>
+    </>
   );
+  // return (
+  //   <InputBase
+  //     id={inputId}
+  //     sx={{
+  //       padding: "0 10px",
+  //       color: "var(--accent-color)",
+  //       border: "1px solid var(--accent-color)",
+  //       borderRadius: "var(--border-radius)",
+  //       ":focus-within": {
+  //         outline: "2px solid var(--accent-color)",
+  //         outlineOffset: "3px",
+  //       },
+  //     }}
+  //   />
+  // );
 };
 
 export default Input;

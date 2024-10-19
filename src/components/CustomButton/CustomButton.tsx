@@ -12,6 +12,7 @@ const CustomButton = ({ children, ...props }: ICustomButtonProps) => {
         backgroundColor: "var(--accent-color)",
         color: "var(--primary-text-color)",
         height: 40,
+        textTransform: "Capitalize",
       }}
       {...props}
     >
