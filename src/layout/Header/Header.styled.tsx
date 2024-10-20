@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 
 const HeaderStyled = styled.header`
-  height: 50px;
+  height: var(--layout-height);
   background-color: var(--accent-color);
 `;
 
@@ -11,8 +11,8 @@ const LogoLinkStyled = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
+  width: var(--layout-height);
+  height: var(--layout-height);
   text-decoration: none;
   color: inherit;
 `;

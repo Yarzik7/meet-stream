@@ -2,6 +2,7 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
 import SectionWithContainer from "@/components/Section/SectionWithContainer/SectionWithContainer";
+import DecoratorBox from "@/components/DecoratorBox/DecoratorBox";
 import CustomButton from "@/components/CustomButton/CustomButton";
 import Input from "@/components/Input/Input";
 
@@ -16,20 +17,26 @@ const CreateRoomSection = () => {
 
   return (
     <SectionWithContainer>
-      <Typography
-        variant="h1"
-        align="center"
-        sx={{ fontSize: "28px", color: "var(--accent-color)" }}
-      >
-        Create room
-      </Typography>
-      <Box sx={{ marginTop: "20px" }}>
-        <CustomButton onClick={onCreateNewRoom}>New room</CustomButton>
-        <Box sx={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+      <DecoratorBox>
+        <Typography variant="h1" align="center" sx={{ fontSize: "28px" }}>
+          Create room
+        </Typography>
+      </DecoratorBox>
+
+      <DecoratorBox>
+        <CustomButton onClick={onCreateNewRoom}>Create room</CustomButton>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "flex-end",
+            gap: "10px",
+            marginTop: "20px",
+          }}
+        >
           <Input label="Room code" />
           <CustomButton onClick={onConnect}>Connect</CustomButton>
         </Box>
-      </Box>
+      </DecoratorBox>
     </SectionWithContainer>
   );
 };

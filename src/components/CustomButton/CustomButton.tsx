@@ -9,10 +9,17 @@ const CustomButton = ({ children, ...props }: ICustomButtonProps) => {
   return (
     <ButtonMUI
       sx={{
-        backgroundColor: "var(--accent-color)",
-        color: "var(--primary-text-color)",
         height: 40,
+        color: "var(--primary-text-color)",
         textTransform: "Capitalize",
+        backgroundColor: "var(--accent-color)",
+        border: "2px solid var(--primary-text-color)",
+        borderRadius: "var(--border-radius)",
+        transition:
+          "background-color var(--transition-duration) var(--timing-function)",
+        ":hover": {
+          backgroundColor: "var(--secondary-accent-color)",
+        },
       }}
       {...props}
     >
