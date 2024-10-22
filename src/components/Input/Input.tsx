@@ -1,12 +1,5 @@
 import React, { useId } from "react";
 import { InputStyled, InputBoxStyled, InputLabelStyled } from "./Input.styled";
-// import {
-//   // InputBase,
-//   FormControl,
-//   InputLabel,
-//   Input as InputMUI,
-// } from "@mui/material";
-
 interface IInputProps {
   label?: string;
 }

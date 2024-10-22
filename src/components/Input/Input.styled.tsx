@@ -18,7 +18,7 @@ const InputStyled = styled.input`
   border: none;
   border-radius: var(--border-radius);
 
-  transition: outline var(--transition-duration) var(--timing-function);
+  transition: outline-color var(--transition-duration) var(--timing-function);
 
   &:hover,
   &:focus {
