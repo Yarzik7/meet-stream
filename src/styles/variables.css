@@ -12,6 +12,7 @@
 
   /* Indents */
   --padding-container: 15px;
+  --padding-button: 5px 5px;
 
   /* Transitions and animations */
   --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
