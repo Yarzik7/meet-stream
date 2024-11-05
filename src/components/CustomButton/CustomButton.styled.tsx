@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Button } from '@mui/material';
 import styled from '@emotion/styled';
 
-const LinkAsButtonStyled = styled(Link)`
+const BaseButtonStyles = `
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,9 +11,7 @@ const LinkAsButtonStyled = styled(Link)`
 
   font-size: 14px;
   color: var(--primary-text-color);
-  text-transform: Capitalize;
-  text-decoration: none;
-
+  text-transform: capitalize;
   background-color: var(--accent-color);
   border: 2px solid var(--primary-text-color);
   border-radius: var(--border-radius);
@@ -24,25 +22,13 @@ const LinkAsButtonStyled = styled(Link)`
   }
 `;
 
+const LinkAsButtonStyled = styled(Link)`
+  ${BaseButtonStyles}
+  text-decoration: none;
+`;
+
 const ButtonStyled = styled(Button)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  padding: var(--padding-button);
-
-  font-size: 14px;
-  color: var(--primary-text-color);
-  text-transform: Capitalize;
-
-  background-color: var(--accent-color);
-  border: 2px solid var(--primary-text-color);
-  border-radius: var(--border-radius);
-  transition: background-color var(--transition-duration) var(--timing-function);
-
-  &:hover {
-    background-color: var(--secondary-accent-color);
-  }
+  ${BaseButtonStyles}
 `;
 
 export { LinkAsButtonStyled, ButtonStyled };
