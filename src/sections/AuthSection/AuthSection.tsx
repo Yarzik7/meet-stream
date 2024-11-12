@@ -7,7 +7,7 @@ const AuthSection = () => {
   return (
     <SectionWithContainer>
       <DecoratorBox>
-        <h1 style={{ textAlign: 'center' }}>Auth</h1>
+        <h1>Auth</h1>
         <Form />
       </DecoratorBox>
     </SectionWithContainer>
