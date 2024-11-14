@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 import { LinkAsButtonStyled, ButtonStyled } from './CustomButton.styled';
 import { ButtonProps } from '@mui/material';
 
@@ -12,7 +13,9 @@ const CustomButton = ({ href, children, ...props }: ICustomButtonProps) => {
   return (
     <>
       {href ? (
-        <LinkAsButtonStyled href={href}>{children}</LinkAsButtonStyled>
+        <LinkAsButtonStyled LinkComponent={Link} href={href}>
+          {children}
+        </LinkAsButtonStyled>
       ) : (
         <ButtonStyled {...props}>{children}</ButtonStyled>
       )}

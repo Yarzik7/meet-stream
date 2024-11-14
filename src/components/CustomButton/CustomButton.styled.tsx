@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Button } from '@mui/material';
 import styled from '@emotion/styled';
 
@@ -22,8 +21,8 @@ const BaseButtonStyles = `
   }
 `;
 
-const LinkAsButtonStyled = styled(Link)`
-  ${BaseButtonStyles}
+const LinkAsButtonStyled = styled(Button)`
+  ${BaseButtonStyles};
   text-decoration: none;
 `;
 
