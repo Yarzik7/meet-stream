@@ -1,7 +1,16 @@
 import React from 'react';
+import Form from '../Form/Form';
+import Input from '../Input/Input';
 
 const LoginForm = () => {
-  return <div>LoginForm</div>;
+  return (
+    <>
+      <Form>
+        <Input label="Email" />
+        <Input label="Password" />
+      </Form>
+    </>
+  );
 };
 
 export default LoginForm;

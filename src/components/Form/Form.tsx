@@ -1,11 +1,17 @@
 import React from 'react';
+import { FormStyled } from './Form.styled';
 import CustomButton from '../CustomButton/CustomButton';
 
-const Form = () => {
+interface IFormProps {
+  children: React.ReactNode;
+}
+
+const Form = ({ children }: IFormProps) => {
   return (
-    <form>
+    <FormStyled>
+      {children}
       <CustomButton>Login</CustomButton>
-    </form>
+    </FormStyled>
   );
 };
 

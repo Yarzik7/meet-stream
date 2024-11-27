@@ -11,7 +11,7 @@ const Header = () => {
       <Container>
         <HeaderContainer>
           <Logo />
-          <CustomButton href="/auth">Enter</CustomButton>
+          <CustomButton href="/auth/login">Enter</CustomButton>
         </HeaderContainer>
       </Container>
     </HeaderStyled>

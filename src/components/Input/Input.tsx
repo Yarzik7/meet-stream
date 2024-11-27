@@ -1,5 +1,7 @@
-import React, { useId } from "react";
-import { InputStyled, InputBoxStyled, InputLabelStyled } from "./Input.styled";
+'use client';
+
+import React, { useId } from 'react';
+import { InputStyled, InputBoxStyled, InputLabelStyled } from './Input.styled';
 interface IInputProps {
   label?: string;
 }
