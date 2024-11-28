@@ -1,24 +1,24 @@
-"use client";
-import React from "react";
-import { Typography, Box } from "@mui/material";
-import SectionWithContainer from "@/components/Section/SectionWithContainer/SectionWithContainer";
-import DecoratorBox from "@/components/DecoratorBox/DecoratorBox";
-import CustomButton from "@/components/CustomButton/CustomButton";
-import Input from "@/components/Input/Input";
+'use client';
+import React from 'react';
+import { Typography, Box } from '@mui/material';
+import SectionWithContainer from '@/components/Section/SectionWithContainer/SectionWithContainer';
+import DecoratorBox from '@/components/DecoratorBox/DecoratorBox';
+import CustomButton from '@/components/CustomButton/CustomButton';
+import Input from '@/components/Input/Input';
 
 const CreateRoomSection = () => {
   const onCreateNewRoom = (): void => {
-    console.log("Create new room");
+    console.log('Create new room');
   };
 
   const onConnect = (): void => {
-    console.log("Connect");
+    console.log('Connect');
   };
 
   return (
     <SectionWithContainer>
-      <DecoratorBox>
-        <Typography variant="h1" align="center" sx={{ fontSize: "28px" }}>
+      <DecoratorBox sx={{ marginBottom: '20px' }}>
+        <Typography variant="h1" align="center" sx={{ fontSize: '28px' }}>
           Create room
         </Typography>
       </DecoratorBox>
@@ -27,10 +27,10 @@ const CreateRoomSection = () => {
         <CustomButton onClick={onCreateNewRoom}>Create room</CustomButton>
         <Box
           sx={{
-            display: "flex",
-            alignItems: "flex-end",
-            gap: "10px",
-            marginTop: "20px",
+            display: 'flex',
+            alignItems: 'flex-end',
+            gap: '10px',
+            marginTop: '20px',
           }}
         >
           <Input label="Room code" />

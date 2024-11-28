@@ -3,14 +3,16 @@ import { FormStyled } from './Form.styled';
 import CustomButton from '../CustomButton/CustomButton';
 
 interface IFormProps {
+  buttonCaption: string;
   children: React.ReactNode;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const Form = ({ children }: IFormProps) => {
+const Form = ({ buttonCaption, onSubmit, children }: IFormProps) => {
   return (
-    <FormStyled>
+    <FormStyled onSubmit={onSubmit}>
       {children}
-      <CustomButton>Login</CustomButton>
+      <CustomButton type="submit">{buttonCaption}</CustomButton>
     </FormStyled>
   );
 };

@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react';
+import { SectionStyled } from './Section.styled';
 
 interface ISectionProps {
   children: React.ReactNode;
 }
 
 const Section = ({ children }: ISectionProps) => {
-  return <section>{children}</section>;
+  return <SectionStyled>{children}</SectionStyled>;
 };
 
 export default Section;

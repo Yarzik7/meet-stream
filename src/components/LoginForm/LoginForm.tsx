@@ -5,9 +5,9 @@ import Input from '../Input/Input';
 const LoginForm = () => {
   return (
     <>
-      <Form>
-        <Input label="Email" />
-        <Input label="Password" />
+      <Form buttonCaption="Login">
+        <Input label="Email" name="email" />
+        <Input label="Password" name="password" />
       </Form>
     </>
   );
