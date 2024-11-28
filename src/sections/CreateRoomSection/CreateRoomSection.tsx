@@ -33,7 +33,7 @@ const CreateRoomSection = () => {
             marginTop: '20px',
           }}
         >
-          <Input label="Room code" />
+          <Input label="Room code" name="room_code" />
           <CustomButton onClick={onConnect}>Connect</CustomButton>
         </Box>
       </DecoratorBox>

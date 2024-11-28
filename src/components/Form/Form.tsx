@@ -5,7 +5,7 @@ import CustomButton from '../CustomButton/CustomButton';
 interface IFormProps {
   buttonCaption: string;
   children: React.ReactNode;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const Form = ({ buttonCaption, onSubmit, children }: IFormProps) => {

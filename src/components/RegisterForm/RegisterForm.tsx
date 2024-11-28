@@ -4,17 +4,18 @@ import React from 'react';
 import { useReducer } from 'react';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
+import { IRegisterUserState } from '@/types/Auth.types';
 
-type State = {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  error: boolean;
-  loading: boolean;
-};
+// type State = {
+//   name: string;
+//   username: string;
+//   email: string;
+//   password: string;
+//   error: boolean;
+//   loading: boolean;
+// };
 
-const initialState: State = {
+const initialState: IRegisterUserState = {
   name: '',
   username: '',
   email: '',
@@ -38,7 +39,7 @@ type Action =
   | { type: 'SET_ERROR'; payload: boolean }
   | { type: 'SET_LOADING'; payload: boolean };
 
-function reducer(state: State, action: Action): State {
+function reducer(state: IRegisterUserState, action: Action): IRegisterUserState {
   switch (action.type) {
     case 'SET_NAME':
       return { ...state, name: action.payload };
