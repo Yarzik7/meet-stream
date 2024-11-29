@@ -4,22 +4,16 @@ import React from 'react';
 import { useReducer } from 'react';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
-import { IRegisterUserState } from '@/types/Auth.types';
+import { IRegisterUserState, IStatusState } from '@/types/Auth.types';
 
-// type State = {
-//   name: string;
-//   username: string;
-//   email: string;
-//   password: string;
-//   error: boolean;
-//   loading: boolean;
-// };
-
-const initialState: IRegisterUserState = {
+const initialUserState: IRegisterUserState = {
   name: '',
   username: '',
   email: '',
   password: '',
+};
+
+const initialStatusState: IStatusState = {
   error: false,
   loading: false,
 };
@@ -31,7 +25,7 @@ const ActionTypesMap = {
   password: 'SET_PASSWORD',
 } as const;
 
-type Action =
+type UserAction =
   | { type: (typeof ActionTypesMap)['name']; payload: string }
   | { type: (typeof ActionTypesMap)['username']; payload: string }
   | { type: (typeof ActionTypesMap)['email']; payload: string }
@@ -39,7 +33,9 @@ type Action =
   | { type: 'SET_ERROR'; payload: boolean }
   | { type: 'SET_LOADING'; payload: boolean };
 
-function reducer(state: IRegisterUserState, action: Action): IRegisterUserState {
+type StatusAction = { type: 'SET_ERROR'; payload: boolean } | { type: 'SET_LOADING'; payload: boolean };
+
+function userReducer(state: IRegisterUserState, action: UserAction): IRegisterUserState {
   switch (action.type) {
     case 'SET_NAME':
       return { ...state, name: action.payload };
@@ -49,6 +45,13 @@ function reducer(state: IRegisterUserState, action: Action): IRegisterUserState 
       return { ...state, email: action.payload };
     case 'SET_PASSWORD':
       return { ...state, password: action.payload };
+    default:
+      return state;
+  }
+}
+
+function statusReducer(state: IStatusState, action: StatusAction): IStatusState {
+  switch (action.type) {
     case 'SET_ERROR':
       return { ...state, error: action.payload };
     case 'SET_LOADING':
@@ -59,47 +62,45 @@ function reducer(state: IRegisterUserState, action: Action): IRegisterUserState 
 }
 
 const RegisterForm = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [userState, userDispatch] = useReducer(userReducer, initialUserState);
+  const [statusState, statusDispatch] = useReducer(statusReducer, initialStatusState);
+  false && console.log(statusState);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
     const type = ActionTypesMap[name as keyof typeof ActionTypesMap];
-    dispatch({ type, payload: value });
-    dispatch({ type: 'SET_ERROR', payload: false });
+    userDispatch({ type, payload: value });
+    statusDispatch({ type: 'SET_ERROR', payload: false });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    console.log(state);
-    // {
-    //   email: 'yaroslavch7@gmail.com';
-    //   error: false;
-    //   loading: false;
-    //   name: 'Yaroslav Chaplinskyi';
-    //   password: 'Qwerty123';
-    //   username: 'Yarzik7';
-    // }
+    try {
+      const response = await fetch('https://meet-stream-server.onrender.com/api/auth/register', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userState),
+      });
 
-    // if (!state.name || !state.username) {
-    //   dispatch({ type: 'SET_ERROR', payload: true });
-    //   return;
-    // }
+      if (!response.ok) throw new Error(await response.json());
 
-    // dispatch({ type: 'SET_LOADING', payload: true });
-
-    // setTimeout(() => {
-    //   dispatch({ type: 'SET_LOADING', payload: false });
-    //   console.log(state);
-    // }, 3000);
+      const registeredUserData = await response.json();
+      console.log(registeredUserData);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <Form buttonCaption="Register" onSubmit={handleSubmit}>
-        <Input label="Name" name="name" onChange={handleChange} />
-        <Input label="Username" name="username" onChange={handleChange} />
-        <Input label="Email" name="email" onChange={handleChange} />
-        <Input label="Password" name="password" onChange={handleChange} />
+        <Input label="Name" name="name" onChange={handleChange} required />
+        <Input label="Username" name="username" onChange={handleChange} required />
+        <Input label="Email" name="email" onChange={handleChange} required />
+        <Input label="Password" name="password" onChange={handleChange} required />
       </Form>
     </>
   );

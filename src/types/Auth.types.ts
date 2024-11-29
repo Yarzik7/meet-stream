@@ -5,10 +5,10 @@ interface IStatusState {
   loading: boolean;
 }
 
-interface IRegisterUserState extends Omit<IUser, '_id'>, IStatusState {
+interface IRegisterUserState extends Omit<IUser, '_id'> {
   password: string;
 }
 
-interface ILoginUserState extends Pick<IRegisterUserState, 'email' | 'password'>, IStatusState {}
+type ILoginUserState = Pick<IRegisterUserState, 'email' | 'password'>;
 
-export type { IRegisterUserState, ILoginUserState };
+export type { IRegisterUserState, ILoginUserState, IStatusState };
