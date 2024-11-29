@@ -70,18 +70,27 @@ const RegisterForm = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log('submit');
-    if (!state.name || !state.username) {
-      dispatch({ type: 'SET_ERROR', payload: true });
-      return;
-    }
+    console.log(state);
+    // {
+    //   email: 'yaroslavch7@gmail.com';
+    //   error: false;
+    //   loading: false;
+    //   name: 'Yaroslav Chaplinskyi';
+    //   password: 'Qwerty123';
+    //   username: 'Yarzik7';
+    // }
 
-    dispatch({ type: 'SET_LOADING', payload: true });
+    // if (!state.name || !state.username) {
+    //   dispatch({ type: 'SET_ERROR', payload: true });
+    //   return;
+    // }
 
-    setTimeout(() => {
-      dispatch({ type: 'SET_LOADING', payload: false });
-      console.log(state);
-    }, 3000);
+    // dispatch({ type: 'SET_LOADING', payload: true });
+
+    // setTimeout(() => {
+    //   dispatch({ type: 'SET_LOADING', payload: false });
+    //   console.log(state);
+    // }, 3000);
   };
 
   return (
