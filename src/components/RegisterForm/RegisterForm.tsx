@@ -5,6 +5,7 @@ import { useReducer } from 'react';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
 import { IRegisterUserState, IStatusState } from '@/types/Auth.types';
+import { onUserRegister } from '@/utils/api/onUserRegister';
 
 const initialUserState: IRegisterUserState = {
   name: '',
@@ -75,23 +76,9 @@ const RegisterForm = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    try {
-      const response = await fetch('https://meet-stream-server.onrender.com/api/auth/register', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userState),
-      });
 
-      if (!response.ok) throw new Error(await response.json());
-
-      const registeredUserData = await response.json();
-      console.log(registeredUserData);
-    } catch (error) {
-      console.log(error);
-    }
+    const registeredUser = await onUserRegister(userState);
+    console.log(registeredUser);
   };
 
   return (
