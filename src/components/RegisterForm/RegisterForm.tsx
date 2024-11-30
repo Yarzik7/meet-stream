@@ -2,10 +2,11 @@
 
 import React from 'react';
 import { useReducer } from 'react';
+import { useRouter } from 'next/navigation';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
 import { IRegisterUserState, IStatusState } from '@/types/Auth.types';
-import { onUserRegister } from '@/utils/api/onUserRegister';
+import { onUserRegister } from '@/utils/api';
 
 const initialUserState: IRegisterUserState = {
   name: '',
@@ -65,6 +66,7 @@ function statusReducer(state: IStatusState, action: StatusAction): IStatusState 
 const RegisterForm = () => {
   const [userState, userDispatch] = useReducer(userReducer, initialUserState);
   const [statusState, statusDispatch] = useReducer(statusReducer, initialStatusState);
+  const router = useRouter();
   false && console.log(statusState);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -78,7 +80,12 @@ const RegisterForm = () => {
     event.preventDefault();
 
     const registeredUser = await onUserRegister(userState);
+    if (registeredUser.error) {
+      console.log(registeredUser);
+      return alert(`Error: ${registeredUser.message}`);
+    }
     console.log(registeredUser);
+    router.push('login');
   };
 
   return (
