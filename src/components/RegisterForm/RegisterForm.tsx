@@ -67,7 +67,7 @@ const RegisterForm = () => {
   const [userState, userDispatch] = useReducer(userReducer, initialUserState);
   const [statusState, statusDispatch] = useReducer(statusReducer, initialStatusState);
   const router = useRouter();
-  false && console.log(statusState);
+  if (false) console.log(statusState);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;

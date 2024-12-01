@@ -1,7 +1,7 @@
 import 'modern-normalize/modern-normalize.css';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import SharedDefaultLayout from '@/layout/SharedDefaultLayout/SharedDefaultLayout';
+import App from '@/components/App/App';
 
 import './globals.css';
 import css from './page.module.css';
@@ -32,9 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <div className={css.wrapper}>
-          <SharedDefaultLayout>
-            <main className={css.main}>{children}</main>
-          </SharedDefaultLayout>
+          <App>{children}</App>
         </div>
       </body>
     </html>
