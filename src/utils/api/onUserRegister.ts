@@ -10,7 +10,7 @@ export const onUserRegister = async (userData: IRegisterUserState) => {
     return registeredUserResponse.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      return error.response?.data;
+      return error.response?.data ?? error;
     }
     return error;
   }

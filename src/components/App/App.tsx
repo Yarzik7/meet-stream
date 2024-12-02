@@ -6,7 +6,6 @@ import SharedDefaultLayout from '@/layout/SharedDefaultLayout/SharedDefaultLayou
 import css from './App.module.css';
 
 const App = ({ children }: { children: React.ReactNode }) => {
-  console.log('App');
   return (
     <AuthProvider>
       <SharedDefaultLayout>

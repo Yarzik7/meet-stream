@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 
-const withPrivateRoute = (WrappedComponent: React.ComponentType) => {
-  const AuthenticatedComponent = (props: any) => {
+const withPrivateRoute = <P extends object>(WrappedComponent: React.ComponentType<P>) => {
+  const AuthenticatedComponent: React.FC<P> = props => {
     const { isLoggedIn } = useAuth();
     const router = useRouter();
 

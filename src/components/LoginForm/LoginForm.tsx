@@ -29,11 +29,11 @@ const LoginForm = () => {
     event.preventDefault();
 
     const user = await onUserLogin({ email, password });
+
     if (user?.error || user?.message) {
-      console.log(user);
       return alert(`Error: ${user.message}`);
     }
-    console.log(user);
+
     logIn(user);
     router.push('/');
   };

@@ -17,7 +17,7 @@ export const onGetCurrentUser = async () => {
     return loginUserResponse.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      return error.response?.data;
+      return error.response?.data ?? error;
     }
     return error;
   }

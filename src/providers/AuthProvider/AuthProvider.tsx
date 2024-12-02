@@ -2,41 +2,51 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { onGetCurrentUser } from '@/utils/api';
 import { AuthContext } from '@/contexts/AuthContext';
-// import { IUser } from '@/types/User.types';
+import { IUser } from '@/types/User.types';
 
 interface IAuthProviderProps {
   children: React.ReactNode;
 }
 
-const AuthProvider = ({ children }: IAuthProviderProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({ _id: '', name: '', username: '', email: '' });
+const initialUserState: IUser = { _id: '', name: '', username: '', email: '' };
 
-  const logIn = (user: any): void => {
+const AuthProvider = ({ children }: IAuthProviderProps) => {
+  const [user, setUser] = useState(() => initialUserState);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isRefreshingUser, setIsRefreshingUser] = useState(true);
+  const [error, setError] = useState(null);
+
+  const logIn = (user: IUser): void => {
     setIsLoggedIn(true);
     setUser(user);
   };
 
   const logOut = (): void => {
     setIsLoggedIn(false);
-    setUser({ _id: '', name: '', username: '', email: '' });
+    setUser(initialUserState);
   };
 
   useEffect(() => {
     const refreshingUser = async () => {
-      const user = await onGetCurrentUser();
-      if (user.error) {
-        return alert(user.message);
+      const getUserResult = await onGetCurrentUser();
+
+      if (getUserResult.message) {
+        setError(getUserResult);
+        return alert(getUserResult.message);
       }
 
       setIsLoggedIn(true);
-      setUser(user);
+      setUser(getUserResult);
     };
 
-    refreshingUser();
+    refreshingUser().finally(() => setIsRefreshingUser(false));
   }, []);
 
-  return <AuthContext.Provider value={{ isLoggedIn, user, logOut, logIn }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ isLoggedIn, user, isRefreshingUser, error, logOut, logIn }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

@@ -10,13 +10,13 @@ const clearAuthHeader = (): void => {
 
 export const onUserLogout = async () => {
   try {
-    const loginUserResponse: AxiosResponse<ILogoutUserResponse> = await axios.post('/auth/logout');
+    const logoutUserResponse: AxiosResponse<ILogoutUserResponse> = await axios.post('/auth/logout');
     clearAuthHeader();
     localStorage.setItem('accessToken', '');
-    return loginUserResponse.data;
+    return logoutUserResponse.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      return error.response?.data;
+      return error.response?.data ?? error;
     }
     return error;
   }

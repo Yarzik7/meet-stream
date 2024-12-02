@@ -1,6 +1,6 @@
-import React from "react";
-import Section from "../Section";
-import Container from "../Container/Container";
+import React from 'react';
+import Section from '../Section';
+import Container from '../Container/Container';
 
 interface ISectionWithContainerProps {
   children: React.ReactNode;
@@ -9,6 +9,7 @@ interface ISectionWithContainerProps {
 const SectionWithContainer = ({ children }: ISectionWithContainerProps) => {
   return (
     <Section>
+      {/* <div>{children}</div> */}
       <Container>{children}</Container>
     </Section>
   );

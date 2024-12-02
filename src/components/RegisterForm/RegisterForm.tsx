@@ -80,7 +80,7 @@ const RegisterForm = () => {
     event.preventDefault();
 
     const registeredUser = await onUserRegister(userState);
-    if (registeredUser.error) {
+    if (registeredUser.message) {
       console.log(registeredUser);
       return alert(`Error: ${registeredUser.message}`);
     }
