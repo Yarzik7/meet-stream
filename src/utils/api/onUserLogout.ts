@@ -9,7 +9,6 @@ const clearAuthHeader = (): void => {
 };
 
 export const onUserLogout = async () => {
-  console.log('logout');
   try {
     const loginUserResponse: AxiosResponse<ILogoutUserResponse> = await axios.post('/auth/logout');
     clearAuthHeader();

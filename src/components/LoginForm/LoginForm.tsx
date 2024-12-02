@@ -1,13 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/hooks/useAuth';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
 import { onUserLogin } from '@/utils/api';
+// import { IUser } from '@/types/User.types';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { logIn } = useAuth();
   const router = useRouter();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -26,11 +29,12 @@ const LoginForm = () => {
     event.preventDefault();
 
     const user = await onUserLogin({ email, password });
-    if (user.error) {
+    if (user?.error || user?.message) {
       console.log(user);
       return alert(`Error: ${user.message}`);
     }
     console.log(user);
+    logIn(user);
     router.push('/');
   };
 

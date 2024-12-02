@@ -22,7 +22,7 @@ export const onUserLogin = async (userData: ILoginUserState) => {
     return loginUserResponse.data.user;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      return error.response?.data;
+      return error.response?.data ?? error;
     }
     return error;
   }

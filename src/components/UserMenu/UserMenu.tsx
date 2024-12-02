@@ -6,17 +6,24 @@ import { IUser } from '@/types/User.types';
 
 interface IUserMenuProps {
   user: IUser;
+  onLogOut: () => void;
 }
 
-const UserMenu = ({ user }: IUserMenuProps) => {
-  const onLogout = (): Promise<void> => onUserLogout();
+const UserMenu = ({ user, onLogOut }: IUserMenuProps) => {
+  const onLogout = async (): Promise<void> => {
+    const logOutRes = await onUserLogout();
+    if (logOutRes.error) {
+      return alert(logOutRes.message);
+    }
+    onLogOut();
+  };
 
   return (
     <UserMenuBoxStyled>
-      <div>
+      {/* <div>
         <UsernameStyled>{user.username}</UsernameStyled>
         <UserEmailStyled>{user.email}</UserEmailStyled>
-      </div>
+      </div> */}
       <CustomButton onClick={onLogout}>Logout</CustomButton>
     </UserMenuBoxStyled>
   );

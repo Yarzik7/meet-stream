@@ -8,6 +8,7 @@ import RegisterForm from '@/components/RegisterForm/RegisterForm';
 import { Typography } from '@mui/material';
 import { AuthOfferTextStyled, AuthLinkStyled } from './AuthSection.styled';
 import { usePathname } from 'next/navigation';
+import withRestrictedRoute from '@/components/hoc/withRestrictedRoute';
 
 const AuthSection = () => {
   const authRoute: string = usePathname()?.split('/').at(-1) ?? 'login';
@@ -34,4 +35,4 @@ const AuthSection = () => {
   );
 };
 
-export default AuthSection;
+export default withRestrictedRoute(AuthSection);

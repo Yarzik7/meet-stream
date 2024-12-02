@@ -8,14 +8,14 @@ import UserMenu from '@/components/UserMenu/UserMenu';
 import { HeaderStyled, HeaderContainer } from './Header.styled';
 
 const Header = () => {
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn, user, logOut } = useAuth();
 
   return (
     <HeaderStyled>
       <Container>
         <HeaderContainer>
           <Logo />
-          {isLoggedIn && <UserMenu user={user} />}
+          {isLoggedIn && <UserMenu user={user} onLogOut={logOut} />}
           {!isLoggedIn && <CustomButton href="/auth/login">Enter</CustomButton>}
         </HeaderContainer>
       </Container>
