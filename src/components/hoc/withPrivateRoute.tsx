@@ -11,11 +11,10 @@ const withPrivateRoute = (WrappedComponent: React.ComponentType) => {
 
     useEffect(() => {
       if (!isLoggedIn) {
-        router.replace('/auth/login'); // перенаправляємо, якщо не авторизований
+        router.replace('/auth/login');
       }
     }, [isLoggedIn, router]);
 
-    // Показуємо тільки якщо користувач авторизований
     return isLoggedIn ? <WrappedComponent {...props} /> : null;
   };
 

@@ -11,11 +11,10 @@ const withRestrictedRoute = (WrappedComponent: React.ComponentType) => {
 
     useEffect(() => {
       if (isLoggedIn) {
-        router.replace('/'); // перенаправляємо, якщо вже авторизований
+        router.replace('/');
       }
     }, [isLoggedIn, router]);
 
-    // Показуємо тільки якщо користувач не авторизований
     return !isLoggedIn ? <WrappedComponent {...props} /> : null;
   };
 
