@@ -9,7 +9,7 @@ import Loader from '../Loader/Loader';
 interface IFormProps {
   buttonCaption: string;
   children: React.ReactNode;
-  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
 const Form = ({ buttonCaption, onSubmit, children }: IFormProps) => {
@@ -17,7 +17,7 @@ const Form = ({ buttonCaption, onSubmit, children }: IFormProps) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     setIsLoading(true);
-    onSubmit && (await onSubmit(event));
+    await onSubmit(event);
     setIsLoading(false);
   };
 
