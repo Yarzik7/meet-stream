@@ -5,7 +5,8 @@ import { useAuth } from '@/hooks/useAuth';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
 import { onUserLogin } from '@/utils/api';
-// import { IUser } from '@/types/User.types';
+import { IUser } from '@/types/User.types';
+import { IError } from '@/types/Error.types';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -28,14 +29,16 @@ const LoginForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
-    const user = await onUserLogin({ email, password });
+    const userLoginResult: IUser | IError = await onUserLogin({ email, password });
 
-    if (user?.error || user?.message) {
-      return alert(`Error: ${user.message}`);
+    if ('error' in userLoginResult && userLoginResult.error) {
+      return alert(userLoginResult.message);
     }
 
-    logIn(user);
-    router.push('/');
+    if (!('error' in userLoginResult)) {
+      logIn(userLoginResult);
+      router.replace('/');
+    }
   };
 
   return (

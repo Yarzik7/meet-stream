@@ -11,4 +11,8 @@ interface IRegisterUserState extends Omit<IUser, '_id'> {
 
 type ILoginUserState = Pick<IRegisterUserState, 'email' | 'password'>;
 
-export type { IRegisterUserState, ILoginUserState, IStatusState };
+interface ILogoutUserResponse {
+  message: string;
+}
+
+export type { IRegisterUserState, ILoginUserState, IStatusState, ILogoutUserResponse };

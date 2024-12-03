@@ -7,6 +7,8 @@ import Form from '../Form/Form';
 import Input from '../Input/Input';
 import { IRegisterUserState, IStatusState } from '@/types/Auth.types';
 import { onUserRegister } from '@/utils/api';
+import { IUser } from '@/types/User.types';
+import { IError } from '@/types/Error.types';
 
 const initialUserState: IRegisterUserState = {
   name: '',
@@ -79,13 +81,15 @@ const RegisterForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
-    const registeredUser = await onUserRegister(userState);
-    if (registeredUser.message) {
-      console.log(registeredUser);
-      return alert(`Error: ${registeredUser.message}`);
+    const registerUserResult: IUser | IError = await onUserRegister(userState);
+
+    if ('error' in registerUserResult && registerUserResult.error) {
+      return alert(registerUserResult.message);
     }
-    console.log(registeredUser);
-    router.push('login');
+
+    if (!('error' in registerUserResult)) {
+      router.push('login');
+    }
   };
 
   return (

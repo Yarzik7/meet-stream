@@ -2,12 +2,13 @@
 
 import { createContext } from 'react';
 import { IUser } from '@/types/User.types';
+import { IError } from '@/types/Error.types';
 
 interface IAuthContextDefault {
   isLoggedIn: boolean;
   user: IUser;
   isRefreshingUser: boolean;
-  error: null | object;
+  error: null | IError;
   logOut: () => void;
   logIn: (user: IUser) => void;
 }

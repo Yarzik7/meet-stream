@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { IUser } from '@/types/User.types';
+import { handleAsyncOperationErrors } from './handleAsyncOperationErrors';
 
 const setAuthHeader = (token: string): void => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -8,17 +9,12 @@ const setAuthHeader = (token: string): void => {
 export const onGetCurrentUser = async () => {
   const token = localStorage.getItem('accessToken');
   if (!token) {
-    return { error: true, message: 'Login or register, please!' };
+    return { error: 'TOKEN_ERROR', message: 'Login or register, please!', statusCode: 'TOKEN_ERROR' };
   }
 
-  try {
+  return await handleAsyncOperationErrors<IUser>(async (): Promise<IUser> => {
     setAuthHeader(token);
     const loginUserResponse: AxiosResponse<IUser> = await axios.get('/auth/current');
     return loginUserResponse.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return error.response?.data ?? error;
-    }
-    return error;
-  }
+  });
 };

@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { ILoginUserState } from '@/types/Auth.types';
 import { IUser } from '@/types/User.types';
+import { handleAsyncOperationErrors } from './handleAsyncOperationErrors';
 
 interface IToken {
   accessToken: string;
@@ -15,15 +16,12 @@ const setAuthHeader = (token: string): void => {
 };
 
 export const onUserLogin = async (userData: ILoginUserState) => {
-  try {
+  return await handleAsyncOperationErrors<IUser>(async (): Promise<IUser> => {
     const loginUserResponse: AxiosResponse<ILoginUserResponse> = await axios.post('/auth/login', userData);
+
     setAuthHeader(loginUserResponse.data.accessToken);
     localStorage.setItem('accessToken', loginUserResponse.data.accessToken);
+
     return loginUserResponse.data.user;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return error.response?.data ?? error;
-    }
-    return error;
-  }
+  });
 };
