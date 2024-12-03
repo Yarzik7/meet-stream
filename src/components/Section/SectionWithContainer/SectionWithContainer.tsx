@@ -4,12 +4,12 @@ import Container from '../Container/Container';
 
 interface ISectionWithContainerProps {
   children: React.ReactNode;
+  sectionStyles?: string;
 }
 
-const SectionWithContainer = ({ children }: ISectionWithContainerProps) => {
+const SectionWithContainer = ({ sectionStyles, children }: ISectionWithContainerProps) => {
   return (
-    <Section>
-      {/* <div>{children}</div> */}
+    <Section sectionStyles={sectionStyles}>
       <Container>{children}</Container>
     </Section>
   );
