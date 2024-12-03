@@ -9,7 +9,6 @@ import Input from '../Input/Input';
 import { onUserLogin } from '@/utils/api';
 import { IUser } from '@/types/User.types';
 import { IError } from '@/types/Error.types';
-import Loader from '../Loader/Loader';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');

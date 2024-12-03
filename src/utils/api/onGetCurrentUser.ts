@@ -15,7 +15,6 @@ export const onGetCurrentUser = async () => {
   return await handleAsyncOperationErrors<IUser>(async (): Promise<IUser> => {
     setAuthHeader(token);
     const loginUserResponse: AxiosResponse<IUser> = await axios.get('/auth/current');
-    console.log('refU: ', loginUserResponse);
     return loginUserResponse.data;
   });
 };

@@ -9,7 +9,7 @@ import Loader from '../Loader/Loader';
 interface IFormProps {
   buttonCaption: string;
   children: React.ReactNode;
-  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
 const Form = ({ buttonCaption, onSubmit, children }: IFormProps) => {
