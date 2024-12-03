@@ -9,12 +9,13 @@ const setAuthHeader = (token: string): void => {
 export const onGetCurrentUser = async () => {
   const token = localStorage.getItem('accessToken');
   if (!token) {
-    return { error: 'TOKEN_ERROR', message: 'Login or register, please!', statusCode: 'TOKEN_ERROR' };
+    return { error: 'APP_ERROR', message: 'Login or register, please!', statusCode: 'TOKEN_ERROR' };
   }
 
   return await handleAsyncOperationErrors<IUser>(async (): Promise<IUser> => {
     setAuthHeader(token);
     const loginUserResponse: AxiosResponse<IUser> = await axios.get('/auth/current');
+    console.log('refU: ', loginUserResponse);
     return loginUserResponse.data;
   });
 };

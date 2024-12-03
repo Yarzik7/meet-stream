@@ -88,6 +88,7 @@ const RegisterForm = () => {
     }
 
     if (!('error' in registerUserResult)) {
+      alert('Congratulations! You have been successfully registered!');
       router.push('login');
     }
   };
@@ -97,8 +98,8 @@ const RegisterForm = () => {
       <Form buttonCaption="Register" onSubmit={handleSubmit}>
         <Input label="Name" name="name" onChange={handleChange} required />
         <Input label="Username" name="username" onChange={handleChange} required />
-        <Input label="Email" name="email" onChange={handleChange} required />
-        <Input label="Password" name="password" onChange={handleChange} required />
+        <Input label="Email" name="email" type="email" onChange={handleChange} required />
+        <Input label="Password" name="password" type="password" onChange={handleChange} required />
       </Form>
     </>
   );

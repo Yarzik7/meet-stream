@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -7,6 +9,7 @@ import Input from '../Input/Input';
 import { onUserLogin } from '@/utils/api';
 import { IUser } from '@/types/User.types';
 import { IError } from '@/types/Error.types';
+import Loader from '../Loader/Loader';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -36,6 +39,7 @@ const LoginForm = () => {
     }
 
     if (!('error' in userLoginResult)) {
+      alert(`${userLoginResult.username}, welcome to MeetStream!`);
       logIn(userLoginResult);
       router.replace('/');
     }
@@ -44,8 +48,8 @@ const LoginForm = () => {
   return (
     <>
       <Form buttonCaption="Login" onSubmit={handleSubmit}>
-        <Input label="Email" name="email" onChange={handleChange} />
-        <Input label="Password" name="password" onChange={handleChange} />
+        <Input label="Email" name="email" type="email" onChange={handleChange} />
+        <Input label="Password" name="password" type="password" onChange={handleChange} />
       </Form>
     </>
   );
