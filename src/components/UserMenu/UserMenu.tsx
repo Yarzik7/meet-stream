@@ -4,17 +4,17 @@ import React from 'react';
 import { useState } from 'react';
 import { onUserLogout } from '@/utils/api';
 import CustomButton from '../CustomButton/CustomButton';
-import { UserMenuBoxStyled } from './User.styled';
+import { UserMenuBoxStyled, UserAvatarStyled } from './User.styled';
 import { IUser } from '@/types/User.types';
 import { ILogoutUserResponse } from '@/types/Auth.types';
 import { IError } from '@/types/Error.types';
 import Loader from '../Loader/Loader';
 interface IUserMenuProps {
-  user?: IUser;
+  user: IUser;
   onLogOut: () => void;
 }
 
-const UserMenu = ({ onLogOut }: IUserMenuProps) => {
+const UserMenu = ({ user, onLogOut }: IUserMenuProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onLogout = async (): Promise<void> => {
@@ -33,7 +33,14 @@ const UserMenu = ({ onLogOut }: IUserMenuProps) => {
 
   return (
     <UserMenuBoxStyled>
-      {isLoading ? <Loader /> : <CustomButton onClick={onLogout}>Logout</CustomButton>}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <UserAvatarStyled title={user.username}>{user.username[0]}</UserAvatarStyled>
+          <CustomButton onClick={onLogout}>Logout</CustomButton>
+        </>
+      )}
     </UserMenuBoxStyled>
   );
 };

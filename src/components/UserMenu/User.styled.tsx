@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 
 const UserMenuBoxStyled = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  gap: 8px;
 `;
 
 const UsernameStyled = styled.p`
@@ -16,4 +16,15 @@ const UserEmailStyled = styled.p`
   font-weight: 500;
 `;
 
-export { UserMenuBoxStyled, UsernameStyled, UserEmailStyled };
+const UserAvatarStyled = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+
+  border: 2px solid var(--primary-text-color);
+  border-radius: 50%;
+`;
+
+export { UserMenuBoxStyled, UsernameStyled, UserEmailStyled, UserAvatarStyled };
