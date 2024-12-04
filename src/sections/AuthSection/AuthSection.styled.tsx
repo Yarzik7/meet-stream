@@ -12,11 +12,21 @@ const AuthLinkStyled = styled(Link)`
   text-transform: capitalize;
   color: var(--primary-text-color);
 
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: transparent;
+
   border-radius: var(--border-radius);
-  transition: background-color var(--transition-duration) var(--timing-function);
+  transition: background-color var(--transition-duration) var(--timing-function),
+    outline-color var(--transition-duration) var(--timing-function);
 
   &:hover {
     background-color: var(--secondary-accent-color);
+  }
+
+  &:focus {
+    background-color: var(--secondary-accent-color);
+    outline-color: var(--primary-text-color);
   }
 `;
 

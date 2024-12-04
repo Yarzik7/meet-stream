@@ -16,6 +16,7 @@ const Form = ({ buttonCaption, onSubmit, children }: IFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault();
     setIsLoading(true);
     await onSubmit(event);
     setIsLoading(false);
