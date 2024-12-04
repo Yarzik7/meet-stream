@@ -6,7 +6,7 @@ const nextConfig = {
       {
         source: '/auth',
         destination: '/auth/login',
-        permanent: true, // або false, якщо це може змінитися
+        permanent: true,
       },
     ];
   },

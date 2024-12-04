@@ -21,6 +21,12 @@ const BaseButtonStyles = `
   &:hover {
     background-color: var(--secondary-accent-color);
   }
+
+   &:disabled {
+    color: var(--disabled-text-color);
+    background-color: var(--bg-disabled-color);
+    border-color: var(--border-disabled-color);
+  }
 `;
 
 const LinkAsButtonStyled = styled(Button)`

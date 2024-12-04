@@ -7,4 +7,12 @@ const FormStyled = styled.form`
   gap: 10px;
 `;
 
-export { FormStyled };
+const FormFieldsetStyled = styled.fieldset`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  border: none;
+`;
+
+export { FormStyled, FormFieldsetStyled };

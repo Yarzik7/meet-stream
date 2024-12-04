@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const InputBoxStyled = styled.div``;
 
@@ -18,12 +18,21 @@ const InputStyled = styled.input`
   border: none;
   border-radius: var(--border-radius);
 
-  transition: outline-color var(--transition-duration) var(--timing-function);
+  transition: outline-color var(--transition-duration) var(--timing-function),
+    color var(--transition-duration) var(--timing-function),
+    background-color var(--transition-duration) var(--timing-function),
+    border-color var(--transition-duration) var(--timing-function);
 
   &:hover,
   &:focus {
     outline: 2px solid var(--primary-text-color);
     outline-offset: 3px;
+  }
+
+  &:disabled {
+    color: var(--primary-text-color);
+    background-color: var(--bg-disabled-color);
+    border-color: var(--border-disabled-color);
   }
 `;
 

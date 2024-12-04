@@ -1,8 +1,8 @@
 import React from 'react';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, CircularProgressProps } from '@mui/material';
 
-const Loader = () => {
-  return <CircularProgress sx={{ color: 'var(--primary-text-color)' }} />;
+const Loader = (props: CircularProgressProps) => {
+  return <CircularProgress title="Loader" sx={{ color: 'var(--primary-text-color)' }} {...props} />;
 };
 
 export default Loader;

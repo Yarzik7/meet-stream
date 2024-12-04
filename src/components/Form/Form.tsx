@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useState } from 'react';
-import { FormStyled } from './Form.styled';
+import { FormStyled, FormFieldsetStyled } from './Form.styled';
 import CustomButton from '../CustomButton/CustomButton';
 import Loader from '../Loader/Loader';
 
@@ -23,8 +23,11 @@ const Form = ({ buttonCaption, onSubmit, children }: IFormProps) => {
 
   return (
     <FormStyled onSubmit={handleSubmit}>
-      {children}
-      <CustomButton type="submit">{isLoading ? <Loader /> : buttonCaption}</CustomButton>
+      <FormFieldsetStyled disabled={isLoading}>{children}</FormFieldsetStyled>
+
+      <CustomButton type="submit" disabled={isLoading}>
+        {isLoading ? <Loader size={20} /> : buttonCaption}
+      </CustomButton>
     </FormStyled>
   );
 };
