@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import Form from '../Form/Form';
@@ -9,12 +9,16 @@ import Input from '../Input/Input';
 import { onUserLogin } from '@/utils/api';
 import { IUser } from '@/types/User.types';
 import { IError } from '@/types/Error.types';
+import axios, { CancelTokenSource } from 'axios';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { logIn } = useAuth();
   const router = useRouter();
+  const cancelTokenRef = useRef<CancelTokenSource | null>(null);
+
+  cancelTokenRef.current = axios.CancelToken.source();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
@@ -31,7 +35,10 @@ const LoginForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
-    const userLoginResult: IUser | IError = await onUserLogin({ email, password });
+    const userLoginResult: IUser | IError = await onUserLogin(
+      { email, password },
+      { cancelToken: cancelTokenRef.current?.token }
+    );
 
     if ('error' in userLoginResult && userLoginResult.error) {
       return alert(userLoginResult.message);
@@ -43,6 +50,10 @@ const LoginForm = () => {
       router.replace('/');
     }
   };
+
+  useEffect(() => {
+    return () => cancelTokenRef.current?.cancel();
+  }, []);
 
   return (
     <>

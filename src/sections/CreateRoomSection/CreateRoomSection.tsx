@@ -8,11 +8,11 @@ import Input from '@/components/Input/Input';
 
 const CreateRoomSection = () => {
   const onCreateNewRoom = (): void => {
-    console.log('Create new room');
+    alert('Sorry, this feature is still under development :(');
   };
 
   const onConnect = (): void => {
-    console.log('Connect');
+    alert('Sorry, this feature is still under development :(');
   };
 
   return (

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useReducer } from 'react';
+import { useReducer, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
@@ -9,6 +9,7 @@ import { IRegisterUserState, IStatusState } from '@/types/Auth.types';
 import { onUserRegister } from '@/utils/api';
 import { IUser } from '@/types/User.types';
 import { IError } from '@/types/Error.types';
+import axios, { CancelTokenSource } from 'axios';
 
 const initialUserState: IRegisterUserState = {
   name: '',
@@ -69,7 +70,11 @@ const RegisterForm = () => {
   const [userState, userDispatch] = useReducer(userReducer, initialUserState);
   const [statusState, statusDispatch] = useReducer(statusReducer, initialStatusState);
   const router = useRouter();
-  if (false) console.log(statusState);
+
+  const cancelTokenRef = useRef<CancelTokenSource | null>(null);
+  cancelTokenRef.current = axios.CancelToken.source();
+
+  if (false) console.log(statusState); //  Stub
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
@@ -81,7 +86,9 @@ const RegisterForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
-    const registerUserResult: IUser | IError = await onUserRegister(userState);
+    const registerUserResult: IUser | IError = await onUserRegister(userState, {
+      cancelToken: cancelTokenRef.current?.token,
+    });
 
     if ('error' in registerUserResult && registerUserResult.error) {
       return alert(registerUserResult.message);
@@ -92,6 +99,10 @@ const RegisterForm = () => {
       router.push('login');
     }
   };
+
+  useEffect(() => {
+    return () => cancelTokenRef.current?.cancel();
+  }, []);
 
   return (
     <>

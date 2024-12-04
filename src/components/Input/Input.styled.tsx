@@ -53,6 +53,7 @@ const InputButtonStyled = styled.button`
   align-items: center;
   width: 40px;
   height: 40px;
+  padding: 0;
 
   color: var(--accent-color);
 
@@ -61,7 +62,10 @@ const InputButtonStyled = styled.button`
   background-color: var(--primary-text-color);
 
   outline-color: transparent;
-  transition: outline-color var(--transition-duration) var(--timing-function);
+  transition: outline-color var(--transition-duration) var(--timing-function),
+    color var(--transition-duration) var(--timing-function),
+    background-color var(--transition-duration) var(--timing-function),
+    border-color var(--transition-duration) var(--timing-function);
   cursor: pointer;
 
   &:focus {
@@ -69,6 +73,7 @@ const InputButtonStyled = styled.button`
   }
 
   &:disabled {
+    cursor: default;
     color: var(--primary-text-color);
     background-color: var(--bg-disabled-color);
   }
