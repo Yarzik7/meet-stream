@@ -1,16 +1,18 @@
 'use client';
 import styled from '@emotion/styled';
 
-const FormStyled = styled.form`
+const GAP_FORM_ELEMENT_STYLES = `
   display: flex;
   flex-direction: column;
   gap: 10px;
 `;
 
+const FormStyled = styled.form`
+  ${GAP_FORM_ELEMENT_STYLES}
+`;
+
 const FormFieldsetStyled = styled.fieldset`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  ${GAP_FORM_ELEMENT_STYLES}
 
   border: none;
 `;

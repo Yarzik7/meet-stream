@@ -33,6 +33,10 @@ const InputStyled = styled.input`
     color: var(--primary-text-color);
     background-color: var(--bg-disabled-color);
     border-color: var(--border-disabled-color);
+
+    &:hover {
+      outline: none;
+    }
   }
 `;
 

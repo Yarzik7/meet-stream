@@ -47,8 +47,8 @@ const LoginForm = () => {
   return (
     <>
       <Form buttonCaption="Login" onSubmit={handleSubmit}>
-        <Input label="Email" name="email" type="email" onChange={handleChange} />
-        <Input label="Password" name="password" type="password" onChange={handleChange} />
+        <Input label="Email" name="email" type="email" onChange={handleChange} required />
+        <Input label="Password" name="password" type="password" onChange={handleChange} required />
       </Form>
     </>
   );
