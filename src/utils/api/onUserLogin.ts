@@ -1,11 +1,7 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
-import { ILoginUserState } from '@/types/Auth.types';
+import { ILoginUserState, IToken } from '@/types/Auth.types';
 import { IUser } from '@/types/User.types';
 import { handleAsyncOperationErrors } from './handleAsyncOperationErrors';
-
-interface IToken {
-  accessToken: string;
-}
 
 interface ILoginUserResponse extends IToken {
   user: IUser;

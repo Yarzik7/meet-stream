@@ -15,4 +15,8 @@ interface ILogoutUserResponse {
   message: string;
 }
 
-export type { IRegisterUserState, ILoginUserState, IStatusState, ILogoutUserResponse };
+interface IToken {
+  accessToken: string;
+}
+
+export type { IRegisterUserState, ILoginUserState, IStatusState, ILogoutUserResponse, IToken };
