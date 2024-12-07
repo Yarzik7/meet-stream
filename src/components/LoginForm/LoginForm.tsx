@@ -1,44 +1,32 @@
 'use client';
 
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
 import { onUserLogin } from '@/utils/api';
-import { IUser } from '@/types/User.types';
-import { IError } from '@/types/Error.types';
+import type { IUser } from '@/types/User.types';
+import type { IError } from '@/types/Error.types';
+import type { ILoginUserState } from '@/types/Auth.types';
 import axios, { CancelTokenSource } from 'axios';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
   const { logIn } = useAuth();
+
   const router = useRouter();
+
   const cancelTokenRef = useRef<CancelTokenSource | null>(null);
 
   cancelTokenRef.current = axios.CancelToken.source();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'email':
-        return setEmail(value);
-      case 'password':
-        return setPassword(value);
-      default:
-        return alert('Type is broken');
-    }
-  };
+  const { register, handleSubmit } = useForm<ILoginUserState>();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault();
-
-    const userLoginResult: IUser | IError = await onUserLogin(
-      { email, password },
-      { cancelToken: cancelTokenRef.current?.token }
-    );
+  const onSubmit: SubmitHandler<ILoginUserState> = async data => {
+    const userLoginResult: IUser | IError = await onUserLogin(data, { cancelToken: cancelTokenRef.current?.token });
 
     if ('error' in userLoginResult && userLoginResult.error) {
       return alert(userLoginResult.message);
@@ -50,16 +38,28 @@ const LoginForm = () => {
       router.replace('/');
     }
   };
-  
+
   useEffect(() => {
     return () => cancelTokenRef.current?.cancel();
   }, []);
 
   return (
     <>
-      <Form buttonCaption="Login" onSubmit={handleSubmit}>
-        <Input label="Email" name="email" type="email" onChange={handleChange} required />
-        <Input label="Password" name="password" type="password" onChange={handleChange} required />
+      <Form buttonCaption="Login" handleRHFSubmit={handleSubmit} onSubmit={onSubmit}>
+        <Input<ILoginUserState>
+          label="Email"
+          name="email"
+          type="email"
+          register={register}
+          required
+        />
+        <Input<ILoginUserState>
+          label="Password"
+          name="password"
+          type="password"
+          register={register}
+          required
+        />
       </Form>
     </>
   );
