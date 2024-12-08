@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 const GAP_FORM_ELEMENT_STYLES = `
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 26px;
 `;
 
 const FormStyled = styled.form`
@@ -13,7 +13,6 @@ const FormStyled = styled.form`
 
 const FormFieldsetStyled = styled.fieldset`
   ${GAP_FORM_ELEMENT_STYLES}
-
   border: none;
 `;
 

@@ -5,16 +5,16 @@ import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import Form from '../Form/Form';
-import Input from '../Input/Input';
+import FormInput from '../Form/FormInput/FormInput';
 import { onUserLogin } from '@/utils/api';
 import type { IUser } from '@/types/User.types';
 import type { IError } from '@/types/Error.types';
 import type { ILoginUserState } from '@/types/Auth.types';
 import axios, { CancelTokenSource } from 'axios';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { createEmailRegisterOptions, createPasswordRegisterOptions } from '@/utils/formUtils/registerOptionsCreators';
 
 const LoginForm = () => {
-
   const { logIn } = useAuth();
 
   const router = useRouter();
@@ -23,7 +23,11 @@ const LoginForm = () => {
 
   cancelTokenRef.current = axios.CancelToken.source();
 
-  const { register, handleSubmit } = useForm<ILoginUserState>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ILoginUserState>({ mode: 'onChange' });
 
   const onSubmit: SubmitHandler<ILoginUserState> = async data => {
     const userLoginResult: IUser | IError = await onUserLogin(data, { cancelToken: cancelTokenRef.current?.token });
@@ -46,19 +50,22 @@ const LoginForm = () => {
   return (
     <>
       <Form buttonCaption="Login" handleRHFSubmit={handleSubmit} onSubmit={onSubmit}>
-        <Input<ILoginUserState>
+        <FormInput<ILoginUserState>
           label="Email"
           name="email"
           type="email"
           register={register}
-          required
+          registerOptions={createEmailRegisterOptions<ILoginUserState>()}
+          errors={errors}
         />
-        <Input<ILoginUserState>
+
+        <FormInput<ILoginUserState>
           label="Password"
           name="password"
           type="password"
           register={register}
-          required
+          registerOptions={createPasswordRegisterOptions<ILoginUserState>()}
+          errors={errors}
         />
       </Form>
     </>

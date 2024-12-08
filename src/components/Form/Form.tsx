@@ -23,7 +23,7 @@ const Form = <T extends FieldValues>({ buttonCaption, handleRHFSubmit, onSubmit,
   };
 
   return (
-    <FormStyled onSubmit={handleRHFSubmit(handleSubmit)}>
+    <FormStyled autoComplete="off" onSubmit={handleRHFSubmit(handleSubmit)}>
       <FormFieldsetStyled disabled={isLoading}>{children}</FormFieldsetStyled>
 
       <CustomButton type="submit" disabled={isLoading}>

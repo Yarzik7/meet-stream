@@ -4,13 +4,19 @@ import React from 'react';
 import { useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Form from '../Form/Form';
-import Input from '../Input/Input';
+import FormInput from '../Form/FormInput/FormInput';
 import { IRegisterUserState } from '@/types/Auth.types';
 import { onUserRegister } from '@/utils/api';
 import { IUser } from '@/types/User.types';
 import { IError } from '@/types/Error.types';
 import axios, { CancelTokenSource } from 'axios';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import {
+  createNameRegisterOptions,
+  createUsernameRegisterOptions,
+  createEmailRegisterOptions,
+  createPasswordRegisterOptions,
+} from '@/utils/formUtils/registerOptionsCreators';
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -18,7 +24,11 @@ const RegisterForm = () => {
   const cancelTokenRef = useRef<CancelTokenSource | null>(null);
   cancelTokenRef.current = axios.CancelToken.source();
 
-  const { register, handleSubmit } = useForm<IRegisterUserState>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IRegisterUserState>({ mode: 'onChange' });
 
   const onSubmit: SubmitHandler<IRegisterUserState> = async data => {
     const registerUserResult: IUser | IError = await onUserRegister(data, {
@@ -42,26 +52,38 @@ const RegisterForm = () => {
   return (
     <>
       <Form buttonCaption="Register" handleRHFSubmit={handleSubmit} onSubmit={onSubmit}>
-        <Input<IRegisterUserState> label="Name" name="name" register={register} required />
-        <Input<IRegisterUserState>
+        <FormInput<IRegisterUserState>
+          label="Name"
+          name="name"
+          register={register}
+          registerOptions={createNameRegisterOptions<IRegisterUserState>()}
+          errors={errors}
+        />
+
+        <FormInput<IRegisterUserState>
           label="Username"
           name="username"
           register={register}
-          required
+          registerOptions={createUsernameRegisterOptions<IRegisterUserState>()}
+          errors={errors}
         />
-        <Input<IRegisterUserState>
+
+        <FormInput<IRegisterUserState>
           label="Email"
           name="email"
           type="email"
           register={register}
-          required
+          registerOptions={createEmailRegisterOptions<IRegisterUserState>()}
+          errors={errors}
         />
-        <Input<IRegisterUserState>
+
+        <FormInput<IRegisterUserState>
           label="Password"
           name="password"
           type="password"
           register={register}
-          required
+          registerOptions={createPasswordRegisterOptions<IRegisterUserState>()}
+          errors={errors}
         />
       </Form>
     </>
