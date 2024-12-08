@@ -5,19 +5,18 @@ import { useState } from 'react';
 import { FormStyled, FormFieldsetStyled } from './Form.styled';
 import CustomButton from '../CustomButton/CustomButton';
 import Loader from '../Loader/Loader';
-import { ILoginUserState } from '@/types/Auth.types';
-import { UseFormHandleSubmit, SubmitHandler } from 'react-hook-form';
-interface IFormProps {
+import { UseFormHandleSubmit, SubmitHandler, FieldValues } from 'react-hook-form';
+interface IFormProps<T extends FieldValues> {
   buttonCaption: string;
   children: React.ReactNode;
-  handleRHFSubmit: UseFormHandleSubmit<ILoginUserState>;
-  onSubmit: SubmitHandler<ILoginUserState>; //(data: ILoginUserState) => Promise<void>;
+  handleRHFSubmit: UseFormHandleSubmit<T>;
+  onSubmit: SubmitHandler<T>;
 }
 
-const Form = ({ buttonCaption, handleRHFSubmit, onSubmit, children }: IFormProps) => {
+const Form = <T extends FieldValues>({ buttonCaption, handleRHFSubmit, onSubmit, children }: IFormProps<T>) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (data: ILoginUserState): Promise<void> => {
+  const handleSubmit = async (data: T): Promise<void> => {
     setIsLoading(true);
     await onSubmit(data);
     setIsLoading(false);
