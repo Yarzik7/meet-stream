@@ -10,7 +10,6 @@ export const handleAsyncOperationErrors = async <T, E = IError>(asyncOperation: 
     if (axios.isAxiosError(error)) {
       return error.response?.data ?? { error: error.name, message: error.message, statusCode: error.code };
     }
-
     return error as E;
   }
 };
