@@ -26,7 +26,7 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<ILoginUserState>({ mode: 'onChange' });
 
   const onSubmit: SubmitHandler<ILoginUserState> = async data => {
@@ -49,7 +49,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <Form buttonCaption="Login" handleRHFSubmit={handleSubmit} onSubmit={onSubmit}>
+      <Form buttonCaption="Login" isValidForm={isValid} handleRHFSubmit={handleSubmit} onSubmit={onSubmit}>
         <FormInput<ILoginUserState>
           label="Email"
           name="email"

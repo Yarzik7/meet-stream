@@ -27,7 +27,7 @@ const RegisterForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<IRegisterUserState>({ mode: 'onChange' });
 
   const onSubmit: SubmitHandler<IRegisterUserState> = async data => {
@@ -51,7 +51,7 @@ const RegisterForm = () => {
 
   return (
     <>
-      <Form buttonCaption="Register" handleRHFSubmit={handleSubmit} onSubmit={onSubmit}>
+      <Form buttonCaption="Register" isValidForm={isValid} handleRHFSubmit={handleSubmit} onSubmit={onSubmit}>
         <FormInput<IRegisterUserState>
           label="Name"
           name="name"
