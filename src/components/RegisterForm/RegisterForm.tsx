@@ -28,7 +28,7 @@ const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<IRegisterUserState>({ mode: 'onChange' });
+  } = useForm<IRegisterUserState>({ mode: 'all' });
 
   const onSubmit: SubmitHandler<IRegisterUserState> = async data => {
     const registerUserResult: IUser | IError = await onUserRegister(data, {

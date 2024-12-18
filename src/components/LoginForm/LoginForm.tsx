@@ -27,7 +27,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<ILoginUserState>({ mode: 'onChange' });
+  } = useForm<ILoginUserState>({ mode: 'all' });
 
   const onSubmit: SubmitHandler<ILoginUserState> = async data => {
     const userLoginResult: IUser | IError = await onUserLogin(data, { cancelToken: cancelTokenRef.current?.token });
