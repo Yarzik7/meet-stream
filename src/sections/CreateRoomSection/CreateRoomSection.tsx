@@ -1,14 +1,25 @@
 'use client';
-import React from 'react';
+
+import React, { useState } from 'react';
 import { Typography, Box } from '@mui/material';
+import { useAuth } from '@/hooks/useAuth';
+import { onCreateRoom } from '@/utils/api/onCreateRoom';
 import SectionWithContainer from '@/components/Section/SectionWithContainer/SectionWithContainer';
 import DecoratorBox from '@/components/DecoratorBox/DecoratorBox';
 import CustomButton from '@/components/CustomButton/CustomButton';
 import Input from '@/components/Input/Input';
 
 const CreateRoomSection = () => {
-  const onCreateNewRoom = (): void => {
-    alert('Sorry, this feature is still under development :(');
+  const { isLoggedIn, user } = useAuth();
+  const [isCreatingRoom, setIsCreatingRoom] = useState<boolean>(false);
+
+  const onCreateNewRoom = async (): Promise<void> => {
+    return alert('Sorry, this feature is still under development :(');
+    setIsCreatingRoom(true);
+    const createdRoomResponse = await onCreateRoom({ owner: user._id });
+    setIsCreatingRoom(false);
+    console.log(createdRoomResponse);
+    alert('Room was created!');
   };
 
   const onConnect = (): void => {
@@ -24,7 +35,11 @@ const CreateRoomSection = () => {
       </DecoratorBox>
 
       <DecoratorBox>
-        <CustomButton onClick={onCreateNewRoom}>Create room</CustomButton>
+        {isLoggedIn && (
+          <CustomButton disabled={isCreatingRoom} onClick={onCreateNewRoom}>
+            Create room
+          </CustomButton>
+        )}
         <Box
           sx={{
             display: 'flex',

@@ -5,4 +5,6 @@ interface IUser {
   email: string;
 }
 
-export type { IUser };
+type TOwner = IUser["_id"];
+
+export type { IUser, TOwner };
