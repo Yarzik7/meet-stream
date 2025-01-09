@@ -1,9 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Typography, Box } from '@mui/material';
 import { useAuth } from '@/hooks/useAuth';
 import { onCreateRoom } from '@/utils/api/onCreateRoom';
+import type { IRoom } from '@/types/Room.types';
+import type { IError } from '@/types/Error.types';
 import SectionWithContainer from '@/components/Section/SectionWithContainer/SectionWithContainer';
 import DecoratorBox from '@/components/DecoratorBox/DecoratorBox';
 import CustomButton from '@/components/CustomButton/CustomButton';
@@ -11,19 +14,31 @@ import Input from '@/components/Input/Input';
 
 const CreateRoomSection = () => {
   const { isLoggedIn, user } = useAuth();
+  const router = useRouter();
   const [isCreatingRoom, setIsCreatingRoom] = useState<boolean>(false);
+  const [roomId, setRoomId] = useState<string>('');
 
   const onCreateNewRoom = async (): Promise<void> => {
-    return alert('Sorry, this feature is still under development :(');
+    // return alert('Sorry, this feature is still under development :(');
     setIsCreatingRoom(true);
-    const createdRoomResponse = await onCreateRoom({ owner: user._id });
+    const createdRoomResponse: IRoom | IError = await onCreateRoom({ owner: user._id });
     setIsCreatingRoom(false);
+
+    if ('error' in createdRoomResponse && createdRoomResponse.error) {
+      return alert(createdRoomResponse.message);
+    }
+
+    if (!('error' in createdRoomResponse)) {
+      setRoomId(createdRoomResponse._id);
+    }
+
     console.log(createdRoomResponse);
     alert('Room was created!');
   };
 
   const onConnect = (): void => {
-    alert('Sorry, this feature is still under development :(');
+    router.replace(`/rooms/${roomId}`);
+    // alert('Sorry, this feature is still under development :(');
   };
 
   return (
