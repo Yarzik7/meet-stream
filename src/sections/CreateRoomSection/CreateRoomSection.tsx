@@ -16,7 +16,7 @@ const CreateRoomSection = () => {
   const { isLoggedIn, user } = useAuth();
   const router = useRouter();
   const [isCreatingRoom, setIsCreatingRoom] = useState<boolean>(false);
-  const [roomId, setRoomId] = useState<string>('');
+  // const [roomId, setRoomId] = useState<string>('1');
 
   const onCreateNewRoom = async (): Promise<void> => {
     // return alert('Sorry, this feature is still under development :(');
@@ -28,16 +28,16 @@ const CreateRoomSection = () => {
       return alert(createdRoomResponse.message);
     }
 
-    if (!('error' in createdRoomResponse)) {
-      setRoomId(createdRoomResponse._id);
-    }
+    // if (!('error' in createdRoomResponse)) {
+    //   setRoomId(createdRoomResponse._id);
+    // }
 
     console.log(createdRoomResponse);
     alert('Room was created!');
   };
 
   const onConnect = (): void => {
-    router.replace(`/rooms/${roomId}`);
+    router.replace(`/rooms/${1}`);
     // alert('Sorry, this feature is still under development :(');
   };
 
