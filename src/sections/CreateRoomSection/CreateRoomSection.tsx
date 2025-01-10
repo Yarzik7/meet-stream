@@ -16,7 +16,11 @@ const CreateRoomSection = () => {
   const { isLoggedIn, user } = useAuth();
   const router = useRouter();
   const [isCreatingRoom, setIsCreatingRoom] = useState<boolean>(false);
-  // const [roomId, setRoomId] = useState<string>('1');
+  const [roomId, setRoomId] = useState<string>('');
+
+  const onRoomCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRoomId(event.target.value);
+  };
 
   const onCreateNewRoom = async (): Promise<void> => {
     // return alert('Sorry, this feature is still under development :(');
@@ -37,7 +41,7 @@ const CreateRoomSection = () => {
   };
 
   const onConnect = (): void => {
-    router.replace(`/rooms/${1}`);
+    router.replace(`/rooms/${roomId}`);
     // alert('Sorry, this feature is still under development :(');
   };
 
@@ -63,7 +67,7 @@ const CreateRoomSection = () => {
             marginTop: '20px',
           }}
         >
-          <Input label="Room code" name="room_code" />
+          <Input label="Room code" name="room_code" value={roomId} onChange={onRoomCodeChange} />
           <CustomButton onClick={onConnect}>Connect</CustomButton>
         </Box>
       </DecoratorBox>
