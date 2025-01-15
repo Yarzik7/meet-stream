@@ -35,9 +35,6 @@ const CreateRoomSection = () => {
     // if (!('error' in createdRoomResponse)) {
     //   setRoomId(createdRoomResponse._id);
     // }
-
-    console.log(createdRoomResponse);
-    alert('Room was created!');
   };
 
   const onConnect = (): void => {
