@@ -23,7 +23,6 @@ const CreateRoomSection = () => {
   };
 
   const onCreateNewRoom = async (): Promise<void> => {
-    // return alert('Sorry, this feature is still under development :(');
     setIsCreatingRoom(true);
     const createdRoomResponse: IRoom | IError = await onCreateRoom({ owner: user._id });
     setIsCreatingRoom(false);
